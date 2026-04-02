@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>o´lery — Connexion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;600;700;800&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050816;
+      --surface: rgba(10,14,28,0.92);
+      --surface2: rgba(15,21,40,0.9);
+      --surface3: #1d2642;
+      --border: rgba(255,255,255,0.1);
+      --text: #f4f6ff;
+      --text2: #9399b2;
+      --text3: #555a72;
+      --accent: #d9ff57;
+      --accent-dim: rgba(217,255,87,0.14);
+      --teal: #54f3d1;
+      --danger: #ff7da8;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Epilogue', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(217,255,87,0.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(143,144,255,0.14), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(84,243,209,0.12), transparent 26%),
+        linear-gradient(135deg, #050816 0%, #091022 45%, #0d1830 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-shell {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      background: linear-gradient(135deg, rgba(10,14,28,0.98), rgba(15,21,40,0.96));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-side {
+      padding: 34px;
+      border-right: 1px solid var(--border);
+      background: linear-gradient(160deg, rgba(232,255,71,0.08), rgba(65,234,212,0.05));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    .logo {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      letter-spacing: -1px;
+      margin-top: 14px;
+    }
+
+    .logo span { color: var(--accent); }
+
+    h1 {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 38px;
+      line-height: 1.02;
+      letter-spacing: -1.2px;
+      margin-top: 12px;
+    }
+
+    .lead {
+      color: var(--text2);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-top: 12px;
+      max-width: 460px;
+    }
+
+    .points {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .point {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .point i {
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(65,234,212,0.12);
+      color: var(--teal);
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .demo-box {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      padding: 14px 16px;
+    }
+
+    .demo-box .label {
+      color: var(--text3);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: 8px;
+    }
+
+    .demo-box code {
+      display: block;
+      font-size: 12px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .form-side {
+      padding: 30px;
+    }
+
+    .tabs {
+      display: inline-flex;
+      gap: 6px;
+      padding: 4px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+
+    .tab {
+      border: none;
+      background: transparent;
+      color: var(--text2);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .tab.active {
+      background: var(--accent);
+      color: #070910;
+    }
+
+    .pane { display: none; }
+    .pane.active { display: block; }
+
+    .title {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .sub {
+      color: var(--text3);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .form-group { margin-bottom: 12px; }
+
+    .form-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text2);
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 13px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(232,255,71,0.14);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #8df3df);
+      color: #06101b;
+      box-shadow: 0 8px 24px rgba(217,255,87,0.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(217,255,87,0.22);
+    }
+
+    .btn-ghost {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover {
+      background: var(--surface3);
+    }
+
+    .status {
+      margin-top: 14px;
+      min-height: 20px;
+      font-size: 12px;
+      color: var(--text2);
+    }
+
+    .status.success { color: var(--teal); }
+    .status.error { color: var(--danger); }
+
+    .helper {
+      margin-top: 12px;
+      color: var(--text3);
+      font-size: 12px;
+    }
+
+    .helper a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+      .auth-shell { grid-template-columns: 1fr; }
+      .brand-side { border-right: none; border-bottom: 1px solid var(--border); }
+      .grid-2 { grid-template-columns: 1fr; }
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-shell">
+    <section class="brand-side">
+      <div>
+        <div class="badge">🔐 Espace sécurisé</div>
+        <div class="logo" id="loginBrandName">o<span>´</span>lery</div>
+        <h1 id="loginHeroTitle">Connectez-vous à votre tableau de bord immobilier.</h1>
+        <p class="lead" id="loginHeroLead">Gérez vos biens, locataires et paiements depuis une interface moderne reliée à votre API.</p>
+
+        <div class="points">
+          <div class="point"><i>✓</i> Synchronisation en direct</div>
+          <div class="point"><i>✓</i> JWT + backend Express</div>
+          <div class="point"><i>✓</i> Accès rapide au mode démo</div>
+        </div>
+      </div>
+
+      <div class="demo-box">
+        <div class="label">Compte de démonstration</div>
+        <code>Email : admin@olery.com</code>
+        <code>Mot de passe : admin123</code>
+      </div>
+    </section>
+
+    <section class="form-side">
+      <div class="tabs">
+        <button class="tab active" id="tabLogin" type="button" onclick="switchTab('login')">Connexion</button>
+        <button class="tab" id="tabRegister" type="button" onclick="switchTab('register')">Inscription</button>
+      </div>
+
+      <div class="pane active" id="paneLogin">
+        <div class="title">Bon retour 👋</div>
+        <div class="sub">Connectez-vous pour ouvrir `dashboard.html`.</div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" id="loginEmail" type="email" placeholder="admin@olery.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mot de passe</label>
+            <input class="form-input" id="loginPassword" type="password" placeholder="••••••••" required>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">Se connecter</button>
+            <button class="btn btn-ghost" type="button" id="fillDemoBtn">Compte démo</button>
+            <button class="btn btn-ghost" type="button" id="demoModeBtn">Mode démo</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="pane" id="paneRegister">
+        <div class="title">Créer un compte</div>
+        <div class="sub">Un token JWT sera généré automatiquement après l’inscription.</div>
+
+        <form id="registerForm">
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Prénom</label>
+              <input class="form-input" id="registerFirstName" type="text" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nom</label>
+              <input class="form-input" id="registerLastName" type="text" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" id="registerEmail" type="email" required>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Téléphone</label>
+              <input class="form-input" id="registerPhone" type="text">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Société</label>
+              <input class="form-input" id="registerCompany" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mot de passe</label>
+            <input class="form-input" id="registerPassword" type="password" minlength="6" required>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">Créer le compte</button>
+            <button class="btn btn-ghost" type="button" onclick="switchTab('login')">J’ai déjà un compte</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="status" id="statusMsg"></div>
+      <div class="helper" id="loginHelperText">Après connexion, vous serez redirigé vers le dashboard.</div>
+    </section>
+  </div>
+
+  <script>
+    function getApiBaseUrl() {
+      if (window.location.protocol.startsWith('http')) {
+        localStorage.setItem('olery_server_host', window.location.hostname);
+        return `${window.location.origin}/api`;
+      }
+
+      const savedHost = localStorage.getItem('olery_server_host') || window.location.hostname || 'localhost';
+      return `http://${savedHost}:3001/api`;
+    }
+
+    const API_URL = getApiBaseUrl();
+
+    function getStoredToken() {
+      return localStorage.getItem('olery_token')
+        || localStorage.getItem('oleryToken')
+        || localStorage.getItem('token');
+    }
+
+    function setStoredToken(token) {
+      ['olery_token', 'oleryToken', 'token'].forEach((key) => {
+        if (token) localStorage.setItem(key, token);
+        else localStorage.removeItem(key);
+      });
+    }
+
+    const BUSINESS_PROFILE_KEY = 'olery_business_profile';
+    const DEFAULT_BUSINESS_PROFILE = {
+      ownerName: 'Ndiba Gabou Aïn Soph',
+      companyName: 'o´lery Immobilier',
+      city: 'Dakar',
+      slogan: 'Gestion immobilière premium',
+    };
+
+    function getBusinessProfile() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(BUSINESS_PROFILE_KEY) || '{}');
+        return { ...DEFAULT_BUSINESS_PROFILE, ...saved };
+      } catch (_error) {
+        return { ...DEFAULT_BUSINESS_PROFILE };
+      }
+    }
+
+    async function syncBusinessProfileFromApi() {
+      try {
+        const response = await fetch(`${API_URL}/company-profile`);
+        if (!response.ok) return getBusinessProfile();
+
+        const remoteProfile = await response.json();
+        const nextProfile = { ...DEFAULT_BUSINESS_PROFILE, ...(remoteProfile || {}) };
+        localStorage.setItem(BUSINESS_PROFILE_KEY, JSON.stringify(nextProfile));
+        return nextProfile;
+      } catch (_error) {
+        return getBusinessProfile();
+      }
+    }
+
+    function applyBusinessBranding() {
+      const profile = getBusinessProfile();
+      const brandName = document.getElementById('loginBrandName');
+      const heroTitle = document.getElementById('loginHeroTitle');
+      const heroLead = document.getElementById('loginHeroLead');
+      const helperText = document.getElementById('loginHelperText');
+      const companyField = document.getElementById('registerCompany');
+
+      if (brandName) brandName.textContent = profile.companyName;
+      if (heroTitle) heroTitle.textContent = `Connectez-vous à l’espace de ${profile.companyName}.`;
+      if (heroLead) heroLead.textContent = `${profile.ownerName} peut gérer ses biens, ses clients et ses paiements depuis une interface déjà personnalisée pour ${profile.city}.`;
+      if (helperText) helperText.textContent = `Après connexion, vous serez redirigé vers le dashboard de ${profile.companyName}.`;
+      if (companyField && !companyField.value) companyField.value = profile.companyName;
+      document.title = `${profile.companyName} — Connexion`;
+    }
+
+    function showStatus(message, type = '') {
+      const el = document.getElementById('statusMsg');
+      if (!el) return;
+      el.className = `status ${type}`.trim();
+      el.textContent = message || '';
+    }
+
+    function switchTab(mode) {
+      document.getElementById('tabLogin').classList.toggle('active', mode === 'login');
+      document.getElementById('tabRegister').classList.toggle('active', mode === 'register');
+      document.getElementById('paneLogin').classList.toggle('active', mode === 'login');
+      document.getElementById('paneRegister').classList.toggle('active', mode === 'register');
+      showStatus('');
+    }
+
+    async function apiRequest(endpoint, options = {}) {
+      const token = getStoredToken();
+      const response = await fetch(`${API_URL}${endpoint}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          ...(options.headers || {}),
+        },
+        ...options,
+      });
+
+      const contentType = response.headers.get('content-type') || '';
+      const payload = contentType.includes('application/json')
+        ? await response.json().catch(() => null)
+        : null;
+
+      if (!response.ok) {
+        throw new Error(payload?.error || `HTTP ${response.status}`);
+      }
+
+      return payload;
+    }
+
+    function goToDashboard(demo = false) {
+      window.location.href = demo ? 'dashboard.html?demo=1' : 'dashboard.html';
+    }
+
+    async function handleLogin(event) {
+      event.preventDefault();
+      showStatus('Connexion en cours...');
+
+      try {
+        const result = await apiRequest('/auth/login', {
+          method: 'POST',
+          body: JSON.stringify({
+            email: document.getElementById('loginEmail').value.trim(),
+            password: document.getElementById('loginPassword').value,
+          }),
+        });
+
+        setStoredToken(result.token);
+        showStatus('Connexion réussie. Redirection...', 'success');
+        setTimeout(() => goToDashboard(false), 500);
+      } catch (error) {
+        showStatus(error.message || 'Connexion échouée.', 'error');
+      }
+    }
+
+    async function handleRegister(event) {
+      event.preventDefault();
+      showStatus('Création du compte...');
+
+      try {
+        const result = await apiRequest('/auth/register', {
+          method: 'POST',
+          body: JSON.stringify({
+            firstName: document.getElementById('registerFirstName').value.trim(),
+            lastName: document.getElementById('registerLastName').value.trim(),
+            email: document.getElementById('registerEmail').value.trim(),
+            phone: document.getElementById('registerPhone').value.trim(),
+            company: document.getElementById('registerCompany').value.trim(),
+            password: document.getElementById('registerPassword').value,
+          }),
+        });
+
+        setStoredToken(result.token);
+        showStatus('Compte créé. Redirection vers le dashboard...', 'success');
+        setTimeout(() => goToDashboard(false), 700);
+      } catch (error) {
+        showStatus(error.message || 'Inscription échouée.', 'error');
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+    document.getElementById('registerForm').addEventListener('submit', handleRegister);
+    document.getElementById('fillDemoBtn').addEventListener('click', () => {
+      document.getElementById('loginEmail').value = 'admin@olery.com';
+      document.getElementById('loginPassword').value = 'admin123';
+      showStatus('Identifiants de démonstration remplis.');
+    });
+    document.getElementById('demoModeBtn').addEventListener('click', () => {
+      setStoredToken('');
+      goToDashboard(true);
+    });
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await syncBusinessProfileFromApi();
+      applyBusinessBranding();
+
+      const token = getStoredToken();
+      if (!token) return;
+
+      try {
+        await apiRequest('/auth/me');
+        goToDashboard(false);
+      } catch (_error) {
+        setStoredToken('');
+      }
+    });
+  </script>
+</body>
+</html>
